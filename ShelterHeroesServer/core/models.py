@@ -46,7 +46,7 @@ class Post(models.Model):
         if self.image:
             image = Image.open(self.image)
 
-            if image.format is not "JPEG":
+            if image.format != "JPEG":
                 raise ValidationError("wrong file type. only jpg/jpeg files allowed.")
 
             width, height = image.size
