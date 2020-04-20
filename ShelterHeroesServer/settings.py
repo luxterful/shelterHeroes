@@ -139,7 +139,7 @@ REST_FRAMEWORK = {
 }
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "ShelterHeroesServer/media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "ShelterHeroesServer/static/media")
 CORS_ORIGIN_ALLOW_ALL = True
 
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
@@ -147,3 +147,5 @@ AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 SITE_ID = 1
+
+CSRF_TRUSTED_ORIGINS = [".now.sh"]
