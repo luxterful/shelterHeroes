@@ -40,16 +40,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "django.contrib.admin",
     "corsheaders",
+    "allauth",
+    "allauth.account",
     "rest_framework",
     "rest_framework.authtoken",
     "ShelterHeroesServer.users",
+    "ShelterHeroesServer.storage",
     "ShelterHeroesServer.core",
     "ShelterHeroesServer.api",
     "ShelterHeroesServer.cli",  # only for creating db data
-    "allauth",
-    "allauth.account",
-    "django.contrib.admin",
 ]
 
 AUTH_USER_MODEL = "users.User"

@@ -15,6 +15,12 @@ const Animal = (props) => {
   if (!data) return <div>loading...</div>;
   return (
     <div>
+      <img
+        src={data.image?.image_file}
+        width={100}
+        height={100}
+        style={{ borderRadius: "50px", float: "left", marginRight: "24px", backgroundColor: "grey" }}
+      />
       <h1>{data.name}</h1>
       <h3>{data.shelter.name}</h3>
       <p>
@@ -26,12 +32,17 @@ const Animal = (props) => {
           contentDisabled="Follow"
         />
       </p>
-      Recent Posts
+      <p>Recent Posts</p>
       <Row>
         {data.recent_posts.map((post) => (
           <Col md={4}>
             <Link to={"/posts/" + post.pk}>
-              <img alt={post.text} src={post.image} width="100%" />
+              <img
+                alt={post.text}
+                src={post.image.image_file}
+                width="100%"
+                style={{ borderRadius: "5px", backgroundColor: "grey" }}
+              />
             </Link>
           </Col>
         ))}

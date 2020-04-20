@@ -7,6 +7,7 @@ from django.core.files.base import ContentFile
 
 from ShelterHeroesServer.users.models import User
 from ShelterHeroesServer.core.models import Shelter, Animal, Post
+from ShelterHeroesServer.storage.models import PostImage
 
 
 class Command(BaseCommand):
@@ -16,6 +17,14 @@ class Command(BaseCommand):
         parser.add_argument(
             "--flush", action="store_true", help="Flush database before",
         )
+
+    def _add_post(self, animal, text, img_url, liked_by):
+        img = PostImage()
+        img.image_file.save("", File(open(img_url, "rb")))
+        post = Post(posted_by=animal, text=text, image=img)
+        post.save()
+        post.liked_by.set(liked_by)
+        post.save()
 
     def handle(self, *args, **options):
         if options["flush"]:
@@ -54,7 +63,7 @@ class Command(BaseCommand):
         animal_bjarne.save()
         animal_bjarne.followed_by.set((user_admin, user_chuck, user_norris, user_peter))
 
-        animal_derp = Animal(name="Derpdog", race="crazy Dog", shelter=shelter_neubrunn)
+        animal_derp = Animal(name="Chico", race="crazy Dog", shelter=shelter_neubrunn)
         animal_derp.save()
         animal_derp.followed_by.set((user_admin, user_chuck, user_norris, user_peter))
 
@@ -63,99 +72,57 @@ class Command(BaseCommand):
         animal_toni.followed_by.set((user_admin,))
 
         # -----
-        post_bjarne = Post(posted_by=animal_bjarne, text="Was geht?")
-        post_bjarne.image.save(
-            "x.jpg",
-            File(
-                open(
-                    "./ShelterHeroesServer/cli/management/commands/demo_images/bjarne-1.jpg",
-                    "rb",
-                )
-            ),
+        self._add_post(
+            animal_bjarne,
+            "Was geht?",
+            "./ShelterHeroesServer/static/demo_images/bjarne-1.jpg",
+            [user_admin, user_chuck],
         )
-        post_bjarne.liked_by.set([user_admin, user_chuck])
-        post_bjarne.save()
 
         # -----
-        post2_bjarne = Post(posted_by=animal_bjarne, text="Chillin!")
-        post2_bjarne.image.save(
-            "x.jpg",
-            File(
-                open(
-                    "./ShelterHeroesServer/cli/management/commands/demo_images/bjarne-2.jpg",
-                    "rb",
-                )
-            ),
+        self._add_post(
+            animal_bjarne,
+            "Chillin!",
+            "./ShelterHeroesServer/static/demo_images/bjarne-2.jpg",
+            [user_admin, user_chuck],
         )
-        post2_bjarne.liked_by.set([user_admin, user_chuck])
-        post2_bjarne.save()
 
         # -----
-        post_chico = Post(posted_by=animal_derp, text="Sup?")
-        post_chico.image.save(
-            "x.jpg",
-            File(
-                open(
-                    "./ShelterHeroesServer/cli/management/commands/demo_images/chico-1.jpg",
-                    "rb",
-                )
-            ),
+        self._add_post(
+            animal_derp,
+            "Sup?",
+            "./ShelterHeroesServer/static/demo_images/chico-1.jpg",
+            [user_admin, user_chuck],
         )
-        post_chico.liked_by.set([user_admin, user_chuck])
-        post_chico.save()
 
         # -----
-        post2_chico = Post(posted_by=animal_derp, text="Was ist das?")
-        post2_chico.image.save(
-            "x.jpg",
-            File(
-                open(
-                    "./ShelterHeroesServer/cli/management/commands/demo_images/chico-2.jpg",
-                    "rb",
-                )
-            ),
+        self._add_post(
+            animal_derp,
+            "Was ist das?",
+            "./ShelterHeroesServer/static/demo_images/chico-2.jpg",
+            [user_admin, user_chuck],
         )
-        post2_chico.liked_by.set([user_admin, user_chuck])
-        post2_chico.save()
 
         # -----
-        post_toni = Post(posted_by=animal_toni, text="Hey Ladies")
-        post_toni.image.save(
-            "x.jpg",
-            File(
-                open(
-                    "./ShelterHeroesServer/cli/management/commands/demo_images/toni-1.jpg",
-                    "rb",
-                )
-            ),
+        self._add_post(
+            animal_toni,
+            "Hey Ladies",
+            "./ShelterHeroesServer/static/demo_images/toni-1.jpg",
+            [user_admin, user_chuck],
         )
-        post_toni.liked_by.set([user_admin, user_chuck])
-        post_toni.save()
 
         # -----
-        post2_toni = Post(posted_by=animal_toni, text="Woof")
-        post2_toni.image.save(
-            "x.jpg",
-            File(
-                open(
-                    "./ShelterHeroesServer/cli/management/commands/demo_images/toni-2.jpg",
-                    "rb",
-                )
-            ),
+        self._add_post(
+            animal_toni,
+            "Woof",
+            "./ShelterHeroesServer/static/demo_images/toni-2.jpg",
+            [user_admin, user_chuck],
         )
-        post2_toni.liked_by.set([user_admin, user_chuck])
-        post2_toni.save()
 
         # -----
-        post3_toni = Post(posted_by=animal_toni, text="Ich mach heute parteeyy")
-        post3_toni.image.save(
-            "x.jpg",
-            File(
-                open(
-                    "./ShelterHeroesServer/cli/management/commands/demo_images/toni-3.jpg",
-                    "rb",
-                )
-            ),
+        self._add_post(
+            animal_toni,
+            "Ich mach heute parteeyy",
+            "./ShelterHeroesServer/static/demo_images/toni-3.jpg",
+            [user_admin, user_chuck],
         )
-        post3_toni.liked_by.set([user_admin, user_chuck])
-        post3_toni.save()

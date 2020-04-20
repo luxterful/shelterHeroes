@@ -10,6 +10,11 @@ install:
 
 init_repo:
 	python manage.py makemigrations users
+	python manage.py makemigrations storage
 	python manage.py makemigrations core
 	python manage.py migrate
 	python manage.py init_demo_db --flush
+
+reset_repo:
+	find ShelterHeroesServer -path "*/migrations/*.py" -not -name "__init__.py" -delete
+	find ShelterHeroesServer -path "*/migrations/*.pyc" -delete

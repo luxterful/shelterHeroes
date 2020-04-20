@@ -12,7 +12,7 @@ function Post({ post }) {
     <Card style={{ marginBottom: "20px" }}>
       <Row noGutters mb={3}>
         <Col md={4}>
-          <Card.Img variant="top" src={post.image} />
+          <Card.Img variant="top" src={post.image.image_file} />
         </Col>
         <Col md={8}>
           <Card.Body>

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 from ShelterHeroesServer.core.models import Shelter, Animal, Post, Comment
 from ShelterHeroesServer.users.models import User
+from ShelterHeroesServer.storage.models import PostImage
 
 
 class PostShelterSerializer(serializers.ModelSerializer):
@@ -27,10 +28,21 @@ class PostCommentSerializer(serializers.ModelSerializer):
         fields = ["text", "user"]
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostImageSerializer(serializers.ModelSerializer):
+    image_file = serializers.SerializerMethodField()
 
+    class Meta:
+        model = PostImage
+        fields = ["image_file"]
+
+    def get_image_file(self, obj):
+        return obj.image_file.url
+
+
+class PostSerializer(serializers.ModelSerializer):
     posted_by = PostAnimalSerializer(read_only=True)
     comments = PostCommentSerializer(read_only=True, many=True)
+    image = PostImageSerializer(read_only=True)
     likes_count = serializers.SerializerMethodField()
     liked_by_viewer = serializers.SerializerMethodField()
 

@@ -4,9 +4,12 @@ from ShelterHeroesServer.core.models import Shelter, Animal, Post
 from ShelterHeroesServer.users.models import User
 
 from ShelterHeroesServer.api.core.shelters.serializers import ShelterSerializer
+from ShelterHeroesServer.api.core.posts.serializers import PostImageSerializer
 
 
 class RecentPostSerializer(serializers.ModelSerializer):
+    image = PostImageSerializer(read_only=True)
+
     class Meta:
         model = Post
         fields = ["pk", "image"]
@@ -16,6 +19,7 @@ class AnimalSerializer(serializers.ModelSerializer):
     recent_posts = serializers.SerializerMethodField(source="posts")
     shelter = ShelterSerializer(read_only=True)
     followed_by_viewer = serializers.SerializerMethodField()
+    image = PostImageSerializer(read_only=True)
 
     def get_recent_posts(self, obj):
         return RecentPostSerializer(
@@ -32,4 +36,11 @@ class AnimalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Animal
-        fields = ["pk", "name", "shelter", "recent_posts", "followed_by_viewer"]
+        fields = [
+            "pk",
+            "name",
+            "shelter",
+            "recent_posts",
+            "followed_by_viewer",
+            "image",
+        ]

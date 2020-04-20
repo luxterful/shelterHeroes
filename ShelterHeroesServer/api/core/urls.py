@@ -15,4 +15,8 @@ urlpatterns = [
         "posts/", include("ShelterHeroesServer.api.core.posts.urls", namespace="posts")
     ),
     path("feed", include("ShelterHeroesServer.api.core.feed.urls", namespace="feed")),
+    path(
+        "explore",
+        include("ShelterHeroesServer.api.core.explore.urls", namespace="explore"),
+    ),
 ]

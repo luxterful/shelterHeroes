@@ -23,7 +23,7 @@ function Animal(props) {
     <div>
       <h1>{data.posted_by.name}</h1>
       <h3>{data.posted_by.shelter.name}</h3>
-      <img alt={data.text} src={data.image} width="50%" />
+      <img alt={data.text} src={data.image.image_file} width="50%" />
       <p>{data.text}</p>
       <p>likes: {likeCount}</p>
 

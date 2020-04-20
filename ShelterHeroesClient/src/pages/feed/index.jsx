@@ -14,7 +14,12 @@ const Feed = () => {
   if (!data) return <div>loading...</div>;
 
   if (data.length === 0) {
-    return <p>Looks like you are not following any animal you douche bag</p>;
+    return (
+      <p style={{ textAlign: "center", fontSize: "22pt" }}>
+        Looks like you are not following any animal!
+        <br /> Click on Explore to find some.
+      </p>
+    );
   }
   return data.map((post, k) => <Post post={post} />);
 };
