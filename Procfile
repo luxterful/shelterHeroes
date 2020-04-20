@@ -1,2 +1,2 @@
-release: make reinit_repo
+release: make init_repo
 web: gunicorn ShelterHeroesServer.wsgi --log-file -

@@ -12,8 +12,4 @@ init_repo:
 	python manage.py makemigrations users
 	python manage.py makemigrations core
 	python manage.py migrate
-	python manage.py init_demo_db
-
-reinit_repo:
-	make reset_repo --flush
-	make init_repo
+	python manage.py init_demo_db --flush
