@@ -148,4 +148,4 @@ CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 SITE_ID = 1
 
-CSRF_TRUSTED_ORIGINS = [".now.sh"]
+CSRF_TRUSTED_ORIGINS = [".now.sh", ".luxterful.eu"]
