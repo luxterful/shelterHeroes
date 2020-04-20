@@ -4,6 +4,17 @@ from django import forms
 from ShelterHeroesServer.users.models import User
 from .models import Shelter, Animal, Post, Comment
 
+from django.contrib.sites.models import Site
+from django.contrib.auth.models import Group
+from allauth.account.models import EmailAddress
+from rest_framework.authtoken.models import Token
+
+
+admin.site.unregister(Site)
+admin.site.unregister(Group)
+admin.site.unregister(EmailAddress)
+admin.site.unregister(Token)
+
 
 @admin.register(Shelter)
 class ShelterAdmin(admin.ModelAdmin):
