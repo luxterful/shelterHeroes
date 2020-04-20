@@ -71,14 +71,14 @@ export const FormLogin = () => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <QuickLoginBtn as={Dropdown.Item} email="admin@luxterful.eu" password="Matr1x42" revalidate={revalidate}>
-            Login as Admin
+          <QuickLoginBtn as={Dropdown.Item} email="harry@labby.com" password="qwerty" revalidate={revalidate}>
+            Login as Harry
           </QuickLoginBtn>
-          <QuickLoginBtn as={Dropdown.Item} email="chuck@labby.com" password="Matr1x42" revalidate={revalidate}>
-            Login as Chuck
-          </QuickLoginBtn>
-          <QuickLoginBtn as={Dropdown.Item} email="peter@bauer.net" password="Matr1x42" revalidate={revalidate}>
+          <QuickLoginBtn as={Dropdown.Item} email="peter@bauer.net" password="qwerty" revalidate={revalidate}>
             Login as Peter
+          </QuickLoginBtn>
+          <QuickLoginBtn as={Dropdown.Item} email="chuck@norris.war" password="qwerty" revalidate={revalidate}>
+            Login as Chuck Norris
           </QuickLoginBtn>
         </Dropdown.Menu>
       </Dropdown>

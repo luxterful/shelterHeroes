@@ -26,22 +26,22 @@ class Command(BaseCommand):
             management.call_command("flush", verbosity=0, interactive=False)
 
         user_admin = User.objects.create_superuser(
-            email="admin@luxterful.eu", password="Matr1x42", full_name="Lukas B.",
+            email="admin@luxterful.eu", password="Matr1x42", full_name="Lukas",
         )
         user_admin.save()
 
         user_chuck = User.objects.create_user(
-            email="chuck@labby.com", password="Matr1x42", full_name="Chuck van Labby",
+            email="harry@labby.com", password="qwerty", full_name="Harry",
         )
         user_chuck.save()
 
         user_peter = User.objects.create_user(
-            email="peter@bauer.net", password="Matr1x42", full_name="Peter Landwirt",
+            email="peter@bauer.net", password="qwerty", full_name="Peter",
         )
         user_peter.save()
 
         user_norris = User.objects.create_user(
-            email="chuck@norris.war", password="Matr1x42", full_name="Chuck Norris",
+            email="chuck@norris.war", password="qwerty", full_name="Chuck",
         )
         user_norris.save()
 
@@ -52,13 +52,15 @@ class Command(BaseCommand):
 
         animal_bjarne = Animal(name="Bjarn", race="cute Dog", shelter=shelter_neubrunn)
         animal_bjarne.save()
-        animal_bjarne.followed_by.set((user_admin,))
+        animal_bjarne.followed_by.set((user_admin, user_chuck, user_norris, user_peter))
 
         animal_derp = Animal(name="Derpdog", race="crazy Dog", shelter=shelter_neubrunn)
         animal_derp.save()
+        animal_derp.followed_by.set((user_admin, user_chuck, user_norris, user_peter))
 
         animal_toni = Animal(name="Toni", race="süßer Hund", shelter=shelter_neubrunn)
         animal_toni.save()
+        animal_toni.followed_by.set((user_admin,))
 
         # -----
         post_bjarne = Post(posted_by=animal_bjarne, text="Was geht?")
