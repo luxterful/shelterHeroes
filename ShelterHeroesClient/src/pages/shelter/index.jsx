@@ -15,6 +15,21 @@ const Shelter = (props) => {
   return (
     <div>
       <h1>{data.name}</h1>
+      <div>
+        {data.has_animals.map((a, index) => (
+          <Link key={index} to={"/animals/" + a.pk}>
+            <div style={{ marginBottom: "20px", fontSize: "20pt" }}>
+              <img
+                src={a.image?.image_file}
+                width={100}
+                height={100}
+                style={{ marginRight: "20px", borderRadius: "50px", backgroundColor: "grey" }}
+              />
+              {a.name}
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
