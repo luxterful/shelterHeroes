@@ -6,11 +6,7 @@ from django.contrib.auth import authenticate
 from ShelterHeroesServer.core.models import Shelter, Animal, Post, Comment
 from ShelterHeroesServer.users.models import User
 
-
-class ShelterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Shelter
-        fields = ["pk", "name", "address"]
+from ShelterHeroesServer.api.core.posts.serializers import PostImageSerializer
 
 
 class AnimalPostSerializer(serializers.ModelSerializer):
@@ -21,6 +17,7 @@ class AnimalPostSerializer(serializers.ModelSerializer):
 
 class AnimalSerializer(serializers.ModelSerializer):
     recent_posts = serializers.SerializerMethodField(source="posts")
+    image = PostImageSerializer(read_only=True)
 
     def get_recent_posts(self, obj):
         return AnimalPostSerializer(
@@ -29,4 +26,12 @@ class AnimalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Animal
-        fields = ["pk", "name", "race", "recent_posts"]
+        fields = ["pk", "name", "race", "recent_posts", "image"]
+
+
+class ShelterSerializer(serializers.ModelSerializer):
+    has_animals = AnimalSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Shelter
+        fields = ["pk", "name", "address", "has_animals"]

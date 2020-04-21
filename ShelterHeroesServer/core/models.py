@@ -20,7 +20,9 @@ class Animal(models.Model):
     race = models.CharField(max_length=50, null=True)
     origin = models.CharField(max_length=50, null=True)
     date_of_birth = models.DateField(null=True)
-    shelter = models.ForeignKey(Shelter, on_delete=models.CASCADE)
+    shelter = models.ForeignKey(
+        Shelter, on_delete=models.CASCADE, related_name="has_animals"
+    )
     followed_by = models.ManyToManyField(User, blank=True, related_name="follows")
 
     def __str__(self):
