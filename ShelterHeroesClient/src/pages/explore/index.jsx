@@ -31,7 +31,7 @@ const Explore = (props) => {
       ) : !data ? (
         <div>loading...</div>
       ) : data.length === 0 ? (
-        <div>nothing found...</div>
+        <div>nothing found... :(</div>
       ) : (
         data.map((a, index) => (
           <Link key={index} to={"/animals/" + a.pk}>
