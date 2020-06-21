@@ -19,4 +19,5 @@ urlpatterns = [
         "explore",
         include("ShelterHeroesServer.api.core.explore.urls", namespace="explore"),
     ),
+    path("init/", include("ShelterHeroesServer.api.core.init.urls", namespace="init")),
 ]

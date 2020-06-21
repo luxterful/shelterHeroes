@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.utils.timezone import now
 
 from ShelterHeroesServer.users.models import User
 from ShelterHeroesServer.storage.models import PostImage
@@ -42,3 +43,4 @@ class Comment(models.Model):
     text = models.CharField(max_length=500)
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    creation_date = models.DateTimeField("Created", default=now)
