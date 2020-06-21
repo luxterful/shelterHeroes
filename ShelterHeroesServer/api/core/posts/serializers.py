@@ -22,10 +22,24 @@ class PostAnimalSerializer(serializers.ModelSerializer):
         fields = ["pk", "name", "shelter"]
 
 
+class PostCommentUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["pk", "full_name"]
+
+
 class PostCommentSerializer(serializers.ModelSerializer):
+    user = PostCommentUserSerializer()
+
     class Meta:
         model = Comment
-        fields = ["text", "user"]
+        fields = ["text", "user", "creation_date"]
+
+
+class CreatePostCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ["text", "user", "post"]
 
 
 class PostImageSerializer(serializers.ModelSerializer):

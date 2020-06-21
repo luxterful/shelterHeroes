@@ -2,6 +2,7 @@ import React from "react";
 import Post from "./Post";
 import useSWR from "swr";
 import { swrFetcher } from "../../utils/fetcher";
+import { Row, Col } from "react-bootstrap";
 
 const Feed = () => {
   const { data, error } = useSWR("/api/core/feed", swrFetcher, {
@@ -21,6 +22,14 @@ const Feed = () => {
       </p>
     );
   }
-  return data.map((post, k) => <Post post={post} />);
+  return (
+    <Row>
+      {data.map((post, k) => (
+        <Col md={6}>
+          <Post post={post} />
+        </Col>
+      ))}
+    </Row>
+  );
 };
 export default Feed;

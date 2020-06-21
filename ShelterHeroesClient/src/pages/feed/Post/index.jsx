@@ -10,38 +10,48 @@ function Post({ post }) {
   const [likeCount, setLikeCount] = useState(post.likes_count);
   return (
     <Card style={{ marginBottom: "20px" }}>
-      <Row noGutters mb={3}>
-        <Col md={4}>
-          <Card.Img variant="top" src={post.image.image_file} />
-        </Col>
-        <Col md={8}>
-          <Card.Body>
-            <Card.Title>
-              <Link to={"/animals/" + post.posted_by.pk}>{post.posted_by.name}</Link>
-            </Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              <Link to={"/shelters/" + post.posted_by.shelter.pk}>{post.posted_by.shelter.name}</Link>
-            </Card.Subtitle>
-            <Card.Text>{Text}</Card.Text>
-            <Card.Text>{post.comments.length + " comments"}</Card.Text>
-            <Card.Text>{likeCount + " likes"}</Card.Text>
+      <Link to={"/posts/" + post.pk}>
+        <Card.Img variant="top" src={post.image.image_file} />
+      </Link>
 
-            <ActionButton
-              initEnabled={post.liked_by_viewer}
-              disableActionPostUrl={"/api/core/posts/" + post.pk + "/unlike"}
-              enableActionPostUrl={"/api/core/posts/" + post.pk + "/like"}
-              enableActionCallback={() => setLikeCount(likeCount + 1)}
-              disableActionCallback={() => setLikeCount(likeCount - 1)}
-              contentEnabled={<FontAwesomeIcon icon={HeartSolid} />}
-              contentDisabled={<FontAwesomeIcon icon={HeartBorder} />}
-            />
+      <Card.Body>
+        <Card.Title>
+          <Link to={"/animals/" + post.posted_by.pk} style={{ fontSize: "20pt", color: "black" }}>
+            {post.posted_by.name}
+          </Link>
+        </Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">
+          <Link to={"/shelters/" + post.posted_by.shelter.pk} style={{ fontSize: "16pt", color: "black" }}>
+            {post.posted_by.shelter.name}
+          </Link>
+        </Card.Subtitle>
+        <Card.Text>{post.text}</Card.Text>
 
-            <Button variant="secondary">
-              <FontAwesomeIcon icon={faComment} />
-            </Button>
-          </Card.Body>
-        </Col>
-      </Row>
+        <ActionButton
+          initEnabled={post.liked_by_viewer}
+          disableActionPostUrl={"/api/core/posts/" + post.pk + "/unlike"}
+          enableActionPostUrl={"/api/core/posts/" + post.pk + "/like"}
+          enableActionCallback={() => setLikeCount(likeCount + 1)}
+          disableActionCallback={() => setLikeCount(likeCount - 1)}
+          contentEnabled={
+            <>
+              <FontAwesomeIcon icon={HeartSolid} />
+              {" " + likeCount}
+            </>
+          }
+          contentDisabled={
+            <>
+              <FontAwesomeIcon icon={HeartBorder} />
+              {" " + likeCount}
+            </>
+          }
+        />
+        <Link to={"/posts/" + post.pk} style={{ color: "black" }}>
+          <span style={{ cursor: "pointer", fontSize: "16pt", marginLeft: "10px" }}>
+            <FontAwesomeIcon icon={faComment} /> {post.comments.length}
+          </span>
+        </Link>
+      </Card.Body>
     </Card>
   );
 }

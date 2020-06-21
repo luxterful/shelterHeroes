@@ -8,5 +8,5 @@ urlpatterns = [
     path("<int:pk>", views.PostViewSet.as_view()),
     path("<int:pk>/like", views.PostLikeViewSet.as_view()),
     path("<int:pk>/unlike", views.PostUnlikeViewSet.as_view()),
-    # path("<int:pk>/comments", views.PostViewSet.as_view()),
+    path("<int:pk>/comments", views.PostCommentViewSet.as_view()),
 ]

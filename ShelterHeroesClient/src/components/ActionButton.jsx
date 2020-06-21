@@ -26,6 +26,10 @@ const ActionButton = ({
       });
     }
   };
-  return <Button onClick={clickHandle}>{enabled ? contentEnabled : contentDisabled}</Button>;
+  return (
+    <span style={{ cursor: "pointer", fontSize: "16pt", color: "#DC143C" }} onClick={clickHandle}>
+      {enabled ? contentEnabled : contentDisabled}
+    </span>
+  );
 };
 export default ActionButton;
