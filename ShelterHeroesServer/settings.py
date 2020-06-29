@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "ShelterHeroesServer.core",
     "ShelterHeroesServer.api",
     "ShelterHeroesServer.cli",  # only for creating db data
+    "storages",
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -129,6 +130,25 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "ShelterHeroesServer/static"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# AWS
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_STORAGE_BUCKET_NAME = "shelterheroes"
+
+AWS_ACCESS_KEY_ID = "AKIAVRZNJHIELTUNTDTM"
+AWS_SECRET_ACCESS_KEY = "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"
+
+AWS_S3_CUSTOM_DOMAIN = "%s.s3.eu-central-1.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=86400",
+}
+TATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "mysite/static"),
+]
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
