@@ -1,4 +1,4 @@
-# Shelter Heroes Platform
+# Shelter Heroes Platform (University project)
 
 A social media platform for shelters and their animals.
 
